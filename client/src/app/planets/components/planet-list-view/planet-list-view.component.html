@@ -1,0 +1,8 @@
+<h2>Planet List</h2>
+<div *ngIf="loading$ | async">Loading...</div>
+<ul *ngIf="planets$ | async as planets">
+    <li *ngFor="let planet of planets">
+        {{ planet.planetName }} ({{ planet.planetRadiusKM }} km)
+    </li>
+</ul>
+<div>test</div>
