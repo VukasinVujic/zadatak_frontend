@@ -1,0 +1,24 @@
+<dialog #dlg class="dialog-container">
+    <form (ngSubmit)="submit()" method="dialog">
+        <h3 class="dialog-title">New Planet</h3>
+        <label>Name</label>
+        <input
+            [(ngModel)]="model.planetName"
+            name="planetName"
+            required
+            class="dialog-planet-name"
+        />
+        <label>Radius (km)</label>
+        <input
+            [(ngModel)]="model.planetRadiusKM"
+            name="planetRadiusKM"
+            type="number"
+            required
+            class="dialog-planet-radius"
+        />
+        <div class="dialog-buttons">
+            <button type="button" (click)="close()">Cancel</button>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</dialog>

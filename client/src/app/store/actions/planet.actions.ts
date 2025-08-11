@@ -12,3 +12,8 @@ export const loadPlanetsFailure = createAction(
     '[Planet] Load Planets Failure',
     props<{ error: string }>()
 );
+
+export const addPlanet = createAction(
+    '[Planet] Add Planet',
+    props<{ planet: Planet }>()
+);

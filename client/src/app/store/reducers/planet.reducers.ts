@@ -20,5 +20,9 @@ export const planetReducer = createReducer(
         ...state,
         loading: false,
         error,
+    })),
+    on(PlanetActions.addPlanet, (state, { planet }) => ({
+        ...state,
+        planets: [...state.planets, planet],
     }))
 );

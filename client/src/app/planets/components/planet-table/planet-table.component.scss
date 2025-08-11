@@ -1,0 +1,31 @@
+.table-container {
+    width: 100%;
+    border-collapse: collapse;
+    background: yellow;
+
+    .table-planet-title {
+        background: red;
+        cursor: pointer;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+        padding: 8px;
+    }
+
+    .table-planet-radius {
+        background: blue;
+        cursor: pointer;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+        padding: 8px;
+    }
+
+    .table-planet-row {
+        border-bottom: 1px solid #eee;
+        background: green;
+
+        .table-plane-cell {
+            padding: 8px;
+            background: orange;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<div class="planet-grid-container">
+    <span>Grid view</span>
+    <div *ngFor="let p of view" class="card-container">
+        <div class="card-title">
+            {{ p.planetName }}
+        </div>
+        <div>Radius: {{ p.planetRadiusKM }} km</div>
+        <div *ngIf="p.distInMillionsKM">
+            Distance: {{ p.distInMillionsKM?.fromSun }} km
+        </div>
+    </div>
+</div>

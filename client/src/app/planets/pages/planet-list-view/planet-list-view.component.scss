@@ -1,0 +1,14 @@
+.planet-list-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    background: red;
+
+    .planet-list-search-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+}

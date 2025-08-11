@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { PlanetListViewComponent } from './planets/components/planet-list-view/planet-list-view.component';
+import { PlanetListViewComponent } from './planets/pages/planet-list-view/planet-list-view.component';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as PlanetActions from './store/actions/planet.actions';

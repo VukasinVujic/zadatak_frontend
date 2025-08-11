@@ -1,0 +1,37 @@
+<span>table view</span>
+<table class="table-container">
+    <thead>
+        <tr>
+            <th (click)="onSort('planetName')" class="table-planet-title">
+                Name
+                {{
+                    sort?.field === "planetName"
+                        ? sort?.dir === "asc"
+                            ? "▲"
+                            : "▼"
+                        : ""
+                }}
+            </th>
+            <th (click)="onSort('planetRadiusKM')" class="table-planet-radius">
+                Radius (km)
+                {{
+                    sort?.field === "planetRadiusKM"
+                        ? sort?.dir === "asc"
+                            ? "▲"
+                            : "▼"
+                        : ""
+                }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of view" class="table-planet-row">
+            <td class="table-plane-cell">
+                {{ p.planetName }}
+            </td>
+            <td class="table-plane-cell">
+                {{ p.planetRadiusKM }}
+            </td>
+        </tr>
+    </tbody>
+</table>

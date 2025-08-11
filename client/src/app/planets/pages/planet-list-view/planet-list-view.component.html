@@ -1,0 +1,35 @@
+<div class="planet-list-container">
+    <input
+        type="text"
+        placeholder="Search planets..."
+        [(ngModel)]="filterText"
+        class="planet-list-search-input"
+    />
+    <app-create-planet-dialog
+        #dlg
+        (create)="onCreate($event)"
+    ></app-create-planet-dialog>
+    <button (click)="dlg.open()">CREATE</button>
+
+    <ng-container *ngIf="viewMode$ | async as vm">
+        <button (click)="switchView(vm)">SWITCH VIEW ({{ vm }})</button>
+    </ng-container>
+</div>
+
+<div *ngIf="loading$ | async">Loading...</div>
+
+<ng-container *ngIf="viewMode$ | async as vm">
+    <ng-container *ngIf="vm === 'grid'; else tableTmpl">
+        <app-planet-grid
+            [planets]="(planets$ | async) ?? []"
+            [filterText]="filterText"
+        ></app-planet-grid>
+    </ng-container>
+    <ng-template #tableTmpl>
+        <app-planet-table
+            [planets]="(planets$ | async) ?? []"
+            [filterText]="filterText"
+            (sortChange)="onSortChanged($event)"
+        ></app-planet-table>
+    </ng-template>
+</ng-container>
