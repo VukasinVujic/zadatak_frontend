@@ -4,6 +4,7 @@ export interface PlanetState {
     planets: Planet[];
     selectedPlanet: Planet | null;
     loading: boolean;
+    loaded: boolean;
     error: string | null;
 }
 
@@ -11,5 +12,6 @@ export const initialPlanetState: PlanetState = {
     planets: [],
     selectedPlanet: null,
     loading: false,
+    loaded: false,
     error: null,
 };

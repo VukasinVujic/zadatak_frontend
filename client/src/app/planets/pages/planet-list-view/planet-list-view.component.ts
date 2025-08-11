@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule, AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -10,10 +10,10 @@ import {
 import { selectViewMode } from '../../../store/selectors/ui.selectors';
 import * as PlanetActions from '../../../store/actions/planet.actions';
 import * as UIActions from '../../../store/actions/ui.actions';
-import { Planet } from '../../../models/planet';
-import { CreatePlanetDialogComponent } from '../../dialogs/create-planet-dialog/create-planet-dialog.component';
 import { PlanetTableComponent } from '../../components/planet-table/planet-table.component';
 import { PlanetGridComponent } from '../../components/planet-grid/planet-grid.component';
+import { PlanetFormDialogComponent } from '../../dialogs/planet-form-dialog/planet-form-dialog.component';
+import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-planet-list-view',
@@ -21,27 +21,25 @@ import { PlanetGridComponent } from '../../components/planet-grid/planet-grid.co
     imports: [
         CommonModule,
         NgIf,
-        NgFor,
         AsyncPipe,
-        CreatePlanetDialogComponent,
         PlanetTableComponent,
         PlanetGridComponent,
         FormsModule,
+        PlanetFormDialogComponent,
+        ConfirmDialogComponent,
     ],
     templateUrl: './planet-list-view.component.html',
     styleUrls: ['./planet-list-view.component.scss'],
 })
-export class PlanetListViewComponent implements OnInit {
+export class PlanetListViewComponent {
     private store = inject(Store);
     planets$ = this.store.select(selectAllPlanets);
     loading$ = this.store.select(selectPlanetLoading);
     viewMode$ = this.store.select(selectViewMode);
 
-    filterText = '';
+    @ViewChild('confirmDlg') confirmDlg!: ConfirmDialogComponent;
 
-    ngOnInit() {
-        this.store.dispatch(PlanetActions.loadPlanets());
-    }
+    filterText = '';
 
     // make enum later
     switchView(current: 'grid' | 'table') {
@@ -52,8 +50,18 @@ export class PlanetListViewComponent implements OnInit {
         );
     }
 
-    onCreate(planet: Planet) {
-        this.store.dispatch(PlanetActions.addPlanet({ planet }));
+    async onCreate(formDlg: PlanetFormDialogComponent) {
+        const draft = await formDlg.openForCreate();
+        if (!draft) return;
+        this.store.dispatch(PlanetActions.addPlanet({ planet: draft }));
+    }
+
+    async create(formDlg: PlanetFormDialogComponent) {
+        const draft = await formDlg.openForCreate();
+        if (!draft) return; // cancel
+        const confirmed = await this.confirmDlg.open('Create new  Planet?');
+        if (!confirmed) return;
+        this.store.dispatch(PlanetActions.addPlanet({ planet: draft }));
     }
 
     onSortChanged(_: any) {

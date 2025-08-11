@@ -1,12 +1,25 @@
 <div class="planet-grid-container">
     <span>Grid view</span>
-    <div *ngFor="let p of view" class="card-container">
+    <div
+        *ngFor="let p of view; trackBy: trackById"
+        class="card-container"
+        [routerLink]="['/planets', p.id]"
+        style="cursor: pointer"
+    >
+        <img *ngIf="p.imageUrl" [src]="p.imageUrl" alt="" class="card-img" />
         <div class="card-title">
             {{ p.planetName }}
         </div>
-        <div>Radius: {{ p.planetRadiusKM }} km</div>
-        <div *ngIf="p.distInMillionsKM">
-            Distance: {{ p.distInMillionsKM?.fromSun }} km
+        <div class="muted" *ngIf="p.description">{{ p.description }}</div>
+
+        <div class="row">
+            <span class="label">Color:</span>
+            <span class="chip" [style.background]="p.planetColor">{{
+                p.planetColor || "—"
+            }}</span>
         </div>
+        <div>Radius: {{ p.planetRadiusKM | number }} km</div>
+        <div>From Sun: {{ p.distInMillionsKM?.fromEarth }} km</div>
+        <div>From Earth: {{ p.distInMillionsKM?.fromSun }} km</div>
     </div>
 </div>

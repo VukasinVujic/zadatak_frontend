@@ -2,36 +2,48 @@
 <table class="table-container">
     <thead>
         <tr>
-            <th (click)="onSort('planetName')" class="table-planet-title">
-                Name
-                {{
-                    sort?.field === "planetName"
-                        ? sort?.dir === "asc"
-                            ? "▲"
-                            : "▼"
-                        : ""
-                }}
-            </th>
-            <th (click)="onSort('planetRadiusKM')" class="table-planet-radius">
-                Radius (km)
-                {{
-                    sort?.field === "planetRadiusKM"
-                        ? sort?.dir === "asc"
-                            ? "▲"
-                            : "▼"
-                        : ""
-                }}
-            </th>
+            <th (click)="onSort('planetName')">Name</th>
+            <th (click)="onSort('planetColor')">Color</th>
+            <th (click)="onSort('planetRadiusKM')">Radius (km)</th>
+            <!-- need to be fixed to be sorted by distance from sun -->
+            <th (click)="onSort('distInMillionsKM')">Dist. from Sun (km)</th>
+            <th (click)="onSort('distInMillionsKM')">Dist. from Earth (km)</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of view" class="table-planet-row">
+        <tr
+            *ngFor="let p of view; trackBy: trackPlanet"
+            [routerLink]="['/planets', p.id]"
+            class="table-planet-row"
+            style="cursor: pointer"
+        >
             <td class="table-plane-cell">
                 {{ p.planetName }}
             </td>
-            <td class="table-plane-cell">
-                {{ p.planetRadiusKM }}
+
+            <td class="name-cell">
+                <img
+                    *ngIf="p.imageUrl"
+                    [src]="p.imageUrl"
+                    alt=""
+                    class="thumb"
+                />
+                <div class="name-desc">
+                    <div class="title">{{ p.planetName }}</div>
+                    <div class="desc" *ngIf="p.description">
+                        {{ p.description }}
+                    </div>
+                </div>
             </td>
+
+            <td class="table-plane-cell">
+                {{ p.planetColor }}
+            </td>
+
+            <td class="table-plane-cell">
+                {{ p.distInMillionsKM?.fromEarth }}
+            </td>
+            <td>{{ p.distInMillionsKM?.fromSun }}</td>
         </tr>
     </tbody>
 </table>

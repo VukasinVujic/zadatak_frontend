@@ -4,6 +4,8 @@ import { PlanetListViewComponent } from './planets/pages/planet-list-view/planet
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as PlanetActions from './store/actions/planet.actions';
+import { selectLoaded } from './store/selectors/planet.selectors';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +18,11 @@ export class AppComponent implements OnInit {
     constructor(private store: Store) {}
 
     ngOnInit() {
-        this.store.dispatch(PlanetActions.loadPlanets());
+        this.store
+            .select(selectLoaded)
+            .pipe(take(1))
+            .subscribe((loaded) => {
+                if (!loaded) this.store.dispatch(PlanetActions.loadPlanets());
+            });
     }
 }

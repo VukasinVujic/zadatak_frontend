@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Planet } from '../../../models/planet';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+
+import { Planet } from '../../../models/planet';
 
 type Sort = { field: keyof Planet; dir: 'asc' | 'desc' };
 
 @Component({
     selector: 'app-planet-table',
     standalone: true,
-    imports: [CommonModule, NgFor],
+    imports: [CommonModule, NgFor, RouterLink],
     templateUrl: './planet-table.component.html',
     styleUrl: './planet-table.component.scss',
 })
@@ -16,6 +18,9 @@ export class PlanetTableComponent {
     @Input() filterText = '';
     @Output() sortChange = new EventEmitter<Sort>();
 
+    private router = inject(Router);
+
+    trackPlanet = (_: number, p: Planet) => p.id ?? p.planetName;
     sort: Sort | null = null;
 
     // duplicate code fix later
@@ -56,5 +61,9 @@ export class PlanetTableComponent {
             };
         }
         this.sortChange.emit(this.sort);
+    }
+
+    goToDetails(p: Planet) {
+        this.router.navigate(['/planets', p.id]);
     }
 }

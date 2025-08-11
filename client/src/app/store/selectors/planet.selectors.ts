@@ -18,3 +18,8 @@ export const selectPlanetError = createSelector(
     selectPlanetFeature,
     (state: PlanetState) => state.error
 );
+
+export const selectLoaded = createSelector(
+    selectPlanetFeature,
+    (s) => s.loaded
+);

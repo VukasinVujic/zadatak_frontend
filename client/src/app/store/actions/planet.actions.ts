@@ -17,3 +17,13 @@ export const addPlanet = createAction(
     '[Planet] Add Planet',
     props<{ planet: Planet }>()
 );
+
+export const updatePlanet = createAction(
+    '[Planet] Update Planet',
+    props<{ planet: Planet }>()
+);
+
+export const deletePlanet = createAction(
+    '[Planet] Delete Planet',
+    props<{ id: number }>()
+);

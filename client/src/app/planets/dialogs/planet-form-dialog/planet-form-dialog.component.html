@@ -1,0 +1,48 @@
+<dialog #dlg class="dlg">
+    <h3 class="dialog-title">
+        {{ mode === "create" ? "New Planet" : "Edit Planet" }}
+    </h3>
+
+    <form (submit)="submit($event)">
+        <label>Name</label>
+        <input [(ngModel)]="model.planetName" name="planetName" required />
+
+        <label>Description</label>
+        <textarea [(ngModel)]="model.description" name="description"></textarea>
+
+        <label>Image URL</label>
+        <input [(ngModel)]="model.imageUrl" name="imageUrl" />
+
+        <label>Color</label>
+        <input
+            [(ngModel)]="model.planetColor"
+            name="color"
+            placeholder="#rrggbb or name"
+        />
+
+        <label>Radius (km)</label>
+        <input type="number" [(ngModel)]="model.planetRadiusKM" name="radius" />
+
+        <label>Distance from Sun (km)</label>
+        <input
+            type="number"
+            [(ngModel)]="model.distInMillionsKM!.fromSun"
+            name="sun"
+        />
+
+        <label>Distance from Earth (km)</label>
+        <input
+            type="number"
+            [(ngModel)]="model.distInMillionsKM!.fromEarth"
+            name="earth"
+        />
+
+        <div class="actions">
+            <button type="button" (click)="cancel()">Cancel</button>
+            <button type="submit">
+                {{ mode === "create" ? "Create" : "Save" }}
+            </button>
+        </div>
+    </form>
+</dialog>
+<app-confirm-dialog #confirmDlg></app-confirm-dialog>

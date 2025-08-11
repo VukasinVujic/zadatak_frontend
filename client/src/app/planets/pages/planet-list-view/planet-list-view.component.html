@@ -5,11 +5,8 @@
         [(ngModel)]="filterText"
         class="planet-list-search-input"
     />
-    <app-create-planet-dialog
-        #dlg
-        (create)="onCreate($event)"
-    ></app-create-planet-dialog>
-    <button (click)="dlg.open()">CREATE</button>
+    <app-planet-form-dialog #formDlg></app-planet-form-dialog>
+    <button (click)="onCreate(formDlg)">+ New Planet</button>
 
     <ng-container *ngIf="viewMode$ | async as vm">
         <button (click)="switchView(vm)">SWITCH VIEW ({{ vm }})</button>
@@ -33,3 +30,5 @@
         ></app-planet-table>
     </ng-template>
 </ng-container>
+
+<app-confirm-dialog #confirmDlg></app-confirm-dialog>

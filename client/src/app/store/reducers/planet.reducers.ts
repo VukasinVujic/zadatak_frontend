@@ -14,15 +14,27 @@ export const planetReducer = createReducer(
     on(PlanetActions.loadPlanetsSuccess, (state, { planets }) => ({
         ...state,
         loading: false,
+        loaded: true,
         planets,
     })),
     on(PlanetActions.loadPlanetsFailure, (state, { error }) => ({
         ...state,
         loading: false,
+        loaded: false,
         error,
     })),
     on(PlanetActions.addPlanet, (state, { planet }) => ({
         ...state,
         planets: [...state.planets, planet],
+    })),
+
+    on(PlanetActions.updatePlanet, (state, { planet }) => ({
+        ...state,
+        planets: state.planets.map((p) => (p.id === planet.id ? planet : p)),
+    })),
+
+    on(PlanetActions.deletePlanet, (state, { id }) => ({
+        ...state,
+        planets: state.planets.filter((p) => p.id !== id),
     }))
 );
