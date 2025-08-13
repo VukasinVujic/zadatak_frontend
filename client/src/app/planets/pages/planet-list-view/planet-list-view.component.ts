@@ -45,7 +45,7 @@ export class PlanetListViewComponent {
     switchView(current: 'grid' | 'table') {
         this.store.dispatch(
             UIActions.setViewMode({
-                viewMode: current === 'grid' ? 'table' : 'grid',
+                viewMode: current === 'grid' ? 'grid' : 'table',
             })
         );
     }
@@ -58,8 +58,11 @@ export class PlanetListViewComponent {
 
     async create(formDlg: PlanetFormDialogComponent) {
         const draft = await formDlg.openForCreate();
-        if (!draft) return; // cancel
-        const confirmed = await this.confirmDlg.open('Create new  Planet?');
+        if (!draft) return;
+        const confirmed = await this.confirmDlg.open(
+            'Create new Planet?',
+            'Creating'
+        );
         if (!confirmed) return;
         this.store.dispatch(PlanetActions.addPlanet({ planet: draft }));
     }

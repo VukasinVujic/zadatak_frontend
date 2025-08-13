@@ -1,5 +1,12 @@
-<span>table view</span>
 <table class="table-container">
+    <colgroup>
+        <col class="col-name" />
+        <col class="col-color" />
+        <col class="col-radius" />
+        <col class="col-sun" />
+        <col class="col-earth" />
+    </colgroup>
+
     <thead>
         <tr>
             <th (click)="onSort('planetName')">Name</th>
@@ -17,16 +24,12 @@
             class="table-planet-row"
             style="cursor: pointer"
         >
-            <td class="table-plane-cell">
-                {{ p.planetName }}
-            </td>
-
             <td class="name-cell">
                 <img
                     *ngIf="p.imageUrl"
                     [src]="p.imageUrl"
                     alt=""
-                    class="thumb"
+                    class="planet-image"
                 />
                 <div class="name-desc">
                     <div class="title">{{ p.planetName }}</div>
@@ -41,9 +44,15 @@
             </td>
 
             <td class="table-plane-cell">
+                {{ p.planetRadiusKM }}
+            </td>
+
+            <td class="table-plane-cell">
                 {{ p.distInMillionsKM?.fromEarth }}
             </td>
-            <td>{{ p.distInMillionsKM?.fromSun }}</td>
+            <td class="table-plane-cell">
+                {{ p.distInMillionsKM?.fromSun }}
+            </td>
         </tr>
     </tbody>
 </table>

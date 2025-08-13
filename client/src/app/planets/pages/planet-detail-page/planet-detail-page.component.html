@@ -1,39 +1,72 @@
-<ng-container *ngIf="planet$ | async as p; else notFound">
-    <div class="detail-header">
-        <button (click)="goBack()">← Back</button>
-        <h2>{{ p.planetName }}</h2>
-    </div>
+<div class="detail-container">
+    <ng-container *ngIf="planet$ | async as p; else notFound">
+        <div class="detail-header">
+            <h2 class="detail-title">{{ p.planetName }}</h2>
 
-    <div class="detail-body">
-        <img *ngIf="p.imageUrl" [src]="p.imageUrl" alt="" class="hero" />
-        <p *ngIf="p.description">{{ p.description }}</p>
-
-        <div class="specs">
-            <div>
-                <b>Color:</b>
-                <span class="chip" [style.background]="p.planetColor">{{
-                    p.planetColor || "—"
-                }}</span>
-            </div>
-            <div><b>Radius:</b> {{ p.planetRadiusKM }} km</div>
-            <div>
-                <b>Dist. from Sun:</b> {{ p.distInMillionsKM?.fromSun }} km
-            </div>
-            <div>
-                <b>Dist. from Earth:</b> {{ p.distInMillionsKM?.fromEarth }} km
+            <div class="detail-actions">
+                <button class="detail-btn back-btn" (click)="goBack()">
+                    ← Back
+                </button>
+                <button class="detail-btn edit-btn" (click)="edit(p, formDlg)">
+                    Edit
+                </button>
+                <button class="detail-btn delete-btn" (click)="remove(p)">
+                    Delete
+                </button>
             </div>
         </div>
-    </div>
 
-    <div class="detail-actions">
-        <app-planet-form-dialog #formDlg></app-planet-form-dialog>
-        <button (click)="edit(p, formDlg)">Edit</button>
-        <button class="danger" (click)="remove(p)">Delete</button>
-    </div>
-</ng-container>
+        <div class="detail-section">
+            <div class="detail-body">
+                <div class="detail-body-main">
+                    <img
+                        *ngIf="p.imageUrl"
+                        [src]="p.imageUrl"
+                        alt="no planet"
+                        class="detail-body-img"
+                    />
+                    <div class="detail-body-title-desc">
+                        <h3 class="detail-body-title">{{ p.planetName }}</h3>
+                        <p class="detail-body-desc" *ngIf="p.description">
+                            {{ p.description }}
+                        </p>
+                    </div>
+                </div>
 
-<app-confirm-dialog #confirmDlg></app-confirm-dialog>
+                <div class="specs">
+                    <div class="specs-1">
+                        <div class="col">
+                            <span class="col-info">{{ p.planetRadiusKM }}</span>
+                            <span class="col-label">Radius</span>
+                        </div>
+                        <div class="col">
+                            <span class="col-info">{{
+                                p.distInMillionsKM?.fromSun
+                            }}</span>
+                            <span class="col-label">Dist. from Sun</span>
+                        </div>
+                    </div>
+                    <div class="specs-2">
+                        <div class="col">
+                            <span class="col-info">{{ p.planetColor }}</span>
+                            <span class="col-label">Color</span>
+                        </div>
+                        <div class="col">
+                            <span class="col-info"
+                                >{{ p.distInMillionsKM?.fromEarth }}
+                            </span>
+                            <span class="col-label"> Dist. from Earth </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
 
-<ng-template #notFound>
-    <p>Planet not found.</p>
-</ng-template>
+    <app-confirm-dialog #confirmDlg></app-confirm-dialog>
+    <app-planet-form-dialog #formDlg></app-planet-form-dialog>
+
+    <ng-template #notFound>
+        <p>Planet not found.</p>
+    </ng-template>
+</div>

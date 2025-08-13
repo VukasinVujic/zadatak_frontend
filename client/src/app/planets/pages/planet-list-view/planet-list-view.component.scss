@@ -1,14 +1,114 @@
-.planet-list-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    background: red;
+@use "colors" as *;
 
-    .planet-list-search-input {
-        flex: 1;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
+.planet-list-container {
+    background-color: $secondary-light-blue;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .planet-list-switch-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background-color: $primary-white;
+
+        .planet-list-title {
+            font-family: Inter;
+            font-weight: 700;
+            font-style: Bold;
+            font-size: 38px;
+            line-height: 40px;
+            letter-spacing: 0%;
+            padding-left: 40px;
+        }
+
+        .planet-list-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+            padding-right: 40px;
+
+            .icon-btn {
+                background-color: $primary-white;
+                border: 1px solid $primary-white;
+
+                transition: background-color 0.2s ease;
+                width: 28px;
+                height: 28px;
+                opacity: 1;
+                border-radius: 4px;
+
+                .grid-table-icons {
+                    width: 12px;
+                    height: 12px;
+                    opacity: 1;
+                    font-size: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                &.active {
+                    background-color: $primary-light-blue;
+                    border: 1px solid $primary-light-blue;
+                }
+            }
+
+            .search-input-wrapper {
+                position: relative;
+                display: inline-block;
+
+                .search-icon {
+                    position: absolute;
+                    top: 50%;
+                    left: 8px;
+                    transform: translateY(-50%);
+                    color: $primary-light-gray;
+                    font-size: 20px;
+                    pointer-events: none;
+                }
+
+                .planet-list-search-input {
+                    height: 36px;
+                    font-size: 14px;
+                    flex: 1;
+                    padding-left: 30px;
+                    border: 1px solid $secondary-light-gray;
+                    color: $primary-light-gray;
+                    border-radius: 8px;
+                }
+            }
+
+            // if you make it, make a mixin for this
+            .new-planet-btn {
+                background-color: $primary-purple;
+                color: $primary-white;
+                border: 1px solid $primary-purple;
+                border-radius: 8px;
+                padding: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 600;
+
+                width: 120px;
+                height: 40px;
+                opacity: 1;
+                border-radius: 4px;
+                gap: 10px;
+                padding-top: 10px;
+                padding-right: 12px;
+                padding-bottom: 10px;
+                padding-left: 12px;
+            }
+        }
+    }
+
+    .planet-list-content {
+        background-color: $secondary-light-blue;
+        padding: 40px;
     }
 }

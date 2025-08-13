@@ -1,48 +1,95 @@
 <dialog #dlg class="dlg">
-    <h3 class="dialog-title">
-        {{ mode === "create" ? "New Planet" : "Edit Planet" }}
-    </h3>
+    <div class="dialog-content-container">
+        <h3 class="dialog-title">
+            {{ mode === "create" ? "New Planet" : "Edit Planet" }}
+        </h3>
 
-    <form (submit)="submit($event)">
-        <label>Name</label>
-        <input [(ngModel)]="model.planetName" name="planetName" required />
+        <form (submit)="submit($event)" class="dialog-form">
+            <div class="row-image-container">
+                <label class="row-label">Photo</label>
 
-        <label>Description</label>
-        <textarea [(ngModel)]="model.description" name="description"></textarea>
+                <label class="custom-file-upload">
+                    Browse...
+                    <input
+                        class="row-input"
+                        type="file"
+                        (change)="onFileSelected($event)"
+                        accept="image/*"
+                    />
+                </label>
+            </div>
 
-        <label>Image URL</label>
-        <input [(ngModel)]="model.imageUrl" name="imageUrl" />
+            <label class="row-label">Name</label>
+            <input
+                [(ngModel)]="model.planetName"
+                name="planetName"
+                class="row-input"
+                required
+            />
 
-        <label>Color</label>
-        <input
-            [(ngModel)]="model.planetColor"
-            name="color"
-            placeholder="#rrggbb or name"
-        />
+            <label class="row-label">Description</label>
+            <textarea
+                [(ngModel)]="model.description"
+                name="description"
+                class="row-input"
+            ></textarea>
 
-        <label>Radius (km)</label>
-        <input type="number" [(ngModel)]="model.planetRadiusKM" name="radius" />
+            <div class="row">
+                <div class="col">
+                    <label class="row-label">Radius (km)</label>
+                    <input
+                        class="row-input"
+                        type="number"
+                        [(ngModel)]="model.planetRadiusKM"
+                        name="radius"
+                    />
+                </div>
 
-        <label>Distance from Sun (km)</label>
-        <input
-            type="number"
-            [(ngModel)]="model.distInMillionsKM!.fromSun"
-            name="sun"
-        />
+                <div class="col">
+                    <label class="row-label">Color</label>
+                    <input
+                        class="row-input"
+                        [(ngModel)]="model.planetColor"
+                        name="color"
+                    />
+                </div>
+            </div>
 
-        <label>Distance from Earth (km)</label>
-        <input
-            type="number"
-            [(ngModel)]="model.distInMillionsKM!.fromEarth"
-            name="earth"
-        />
+            <div class="row">
+                <div class="col">
+                    <label class="row-label">Distance from Sun (km)</label>
+                    <input
+                        class="row-input"
+                        type="number"
+                        [(ngModel)]="model.distInMillionsKM!.fromSun"
+                        name="sun"
+                    />
+                </div>
 
-        <div class="actions">
-            <button type="button" (click)="cancel()">Cancel</button>
-            <button type="submit">
-                {{ mode === "create" ? "Create" : "Save" }}
-            </button>
-        </div>
-    </form>
+                <div class="col">
+                    <label class="row-label">Distance from Earth (km)</label>
+                    <input
+                        class="row-input"
+                        type="number"
+                        [(ngModel)]="model.distInMillionsKM!.fromEarth"
+                        name="earth"
+                    />
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="action-button button-confirm" type="submit">
+                    {{ mode === "create" ? "Create" : "Save" }}
+                </button>
+                <button
+                    class="action-button button-cancel"
+                    type="button"
+                    (click)="cancel()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
 </dialog>
 <app-confirm-dialog #confirmDlg></app-confirm-dialog>

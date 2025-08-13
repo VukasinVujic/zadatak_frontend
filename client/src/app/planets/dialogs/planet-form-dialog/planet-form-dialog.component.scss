@@ -1,0 +1,111 @@
+@use "colors" as *;
+
+.dlg {
+    width: 500;
+    height: 592;
+    opacity: 1;
+    border-radius: 8px;
+    border: 1px solid $primary-white;
+
+    .dialog-content-container {
+        .dialog-title {
+            color: $primary-dark-gray;
+        }
+
+        .dialog-form {
+            display: flex;
+            flex-direction: column;
+
+            .row-label {
+                width: 100%;
+                color: $primary-light-gray;
+            }
+
+            .row-input {
+                border: 1px solid $secondary-light-gray;
+                border-radius: 4px;
+                padding: 10px;
+                height: 40px;
+                margin-bottom: 10px;
+                gap: 10px;
+            }
+
+            .row-image-container {
+                display: flex;
+
+                .custom-file-upload {
+                    border: 1px solid $primary-white;
+                    background-color: $primary-light-gray;
+                    color: $primary-white;
+                    width: 87px;
+                    height: 21px;
+                    opacity: 1;
+                    border-radius: 4px;
+                    gap: 10px;
+                    padding-top: 4px;
+                    padding-right: 12px;
+                    padding-bottom: 4px;
+                    padding-left: 12px;
+
+                    font-family: Inter;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 20px;
+                    text-align: center;
+
+                    input[type="file"] {
+                        display: none;
+                    }
+                }
+            }
+
+            .row {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .col {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .actions {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+
+                .action-button {
+                    width: 120px;
+                    height: 40px;
+                    opacity: 1;
+                    border-radius: 4px;
+                    gap: 10px;
+                    padding-top: 10px;
+                    padding-right: 12px;
+                    padding-bottom: 10px;
+                    padding-left: 12px;
+                    font-family: Inter;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 20px;
+                    letter-spacing: 0%;
+                    text-align: center;
+                }
+
+                .button-confirm {
+                    background-color: $primary-dark-blue;
+                    color: $primary-white;
+                    border: 1px solid $primary-dark-blue;
+                }
+
+                .button-cancel {
+                    background-color: $primary-white;
+                    color: $primary-light-gray;
+                    border: 1px solid $primary-white;
+                }
+            }
+        }
+    }
+}

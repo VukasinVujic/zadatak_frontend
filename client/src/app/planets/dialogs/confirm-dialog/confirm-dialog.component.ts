@@ -11,6 +11,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class ConfirmDialogComponent implements OnInit {
     @ViewChild('dlg') dlgRef!: ElementRef<HTMLDialogElement>;
     message = '';
+    messageTitle = '';
 
     private resolver!: (v: boolean) => void;
 
@@ -24,8 +25,9 @@ export class ConfirmDialogComponent implements OnInit {
         window['__confirm__'] = this;
     }
 
-    open(msg: string) {
+    open(msg: string, msgTitle: string) {
         this.message = msg;
+        this.messageTitle = msgTitle;
         this.dlgRef.nativeElement.showModal();
         return new Promise((res) => (this.resolver = res));
     }

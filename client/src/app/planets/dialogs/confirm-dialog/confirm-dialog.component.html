@@ -1,7 +1,16 @@
-<dialog #dlg>
-    <p>{{ message }}</p>
-    <div class="actions">
-        <button (click)="no()">Cancel</button>
-        <button (click)="yes()">OK</button>
+<dialog #dlg class="confirm-dialog">
+    <div class="confirm-dialog-container">
+        <img
+            class="confirm-dialog-container-img"
+            src="assets/images/speech_bubble_exclamation.jpg"
+            alt="no image"
+        />
+
+        <h2>Confirm {{ messageTitle }}</h2>
+        <p>Are you sure you want to {{ message }}</p>
+        <div class="actions">
+            <button (click)="yes()" class="actions-confirm">Confirm</button>
+            <button (click)="no()" class="actions-cancel">Cancel</button>
+        </div>
     </div>
 </dialog>

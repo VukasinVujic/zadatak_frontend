@@ -1,31 +1,105 @@
+@use "colors" as *;
+
 .table-container {
     width: 100%;
     border-collapse: collapse;
-    background: yellow;
 
-    .table-planet-title {
-        background: red;
-        cursor: pointer;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
-        padding: 8px;
+    table-layout: fixed;
+    background-color: $primary-white;
+
+    col.col-name {
+        width: 40%;
+    }
+    col.col-color,
+    col.col-radius,
+    col.col-sun,
+    col.col-earth {
+        width: 15%;
     }
 
-    .table-planet-radius {
-        background: blue;
-        cursor: pointer;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
+    th,
+    td {
         padding: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    th {
+        white-space: normal;
+        word-break: break-word;
+        text-align: left;
+        color: $tertiary-light-gray;
+    }
+
+    td:not(:first-child),
+    th:not(:first-child) {
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .table-container th,
+    .table-container td {
+        padding: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .table-planet-row .name-cell {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .table-planet-row .planet-image {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 auto;
+    }
+
+    .table-planet-row .name-desc {
+        flex: 0 0 200px;
+        min-width: 0;
+    }
+
+    .table-planet-row .desc {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .table-planet-row {
         border-bottom: 1px solid #eee;
-        background: green;
+
+        .name-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+
+            .planet-image {
+                width: 40px;
+                height: 40px;
+                flex: 0 0 auto;
+            }
+
+            .name-desc {
+                flex: 1 1 auto;
+                min-width: 0;
+
+                font-family: Inter;
+                font-weight: 400;
+                font-style: Regular;
+                font-size: 12px;
+                line-height: 20px;
+                letter-spacing: 0%;
+                color: $tertiary-light-gray;
+            }
+        }
 
         .table-plane-cell {
             padding: 8px;
-            background: orange;
         }
     }
 }

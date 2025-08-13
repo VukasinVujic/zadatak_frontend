@@ -1,34 +1,74 @@
 <div class="planet-list-container">
-    <input
-        type="text"
-        placeholder="Search planets..."
-        [(ngModel)]="filterText"
-        class="planet-list-search-input"
-    />
-    <app-planet-form-dialog #formDlg></app-planet-form-dialog>
-    <button (click)="onCreate(formDlg)">+ New Planet</button>
+    <div class="planet-list-switch-container">
+        <h1 class="planet-list-title">Planets</h1>
+        <div class="planet-list-switch">
+            <app-planet-form-dialog #formDlg></app-planet-form-dialog>
+            <ng-container *ngIf="viewMode$ | async as vm">
+                <button
+                    type="button"
+                    class="icon-btn"
+                    title="Grid view"
+                    aria-label="Grid view"
+                    [class.active]="vm === 'grid'"
+                    [attr.aria-pressed]="vm === 'grid'"
+                    (click)="switchView('grid')"
+                >
+                    <span class="material-symbols-outlined grid-table-icons">
+                        grid_view
+                    </span>
+                </button>
 
-    <ng-container *ngIf="viewMode$ | async as vm">
-        <button (click)="switchView(vm)">SWITCH VIEW ({{ vm }})</button>
-    </ng-container>
+                <button
+                    type="button"
+                    class="icon-btn"
+                    title="Table view"
+                    aria-label="Table view"
+                    [class.active]="vm === 'table'"
+                    [attr.aria-pressed]="vm === 'table'"
+                    (click)="switchView('table')"
+                >
+                    <span class="material-symbols-outlined grid-table-icons"
+                        >list</span
+                    >
+                </button>
+            </ng-container>
+
+            <div class="search-input-wrapper">
+                <span class="material-symbols-outlined search-icon"
+                    >search</span
+                >
+                <input
+                    type="text"
+                    placeholder="Search planets..."
+                    [(ngModel)]="filterText"
+                    class="planet-list-search-input"
+                />
+            </div>
+            <button (click)="onCreate(formDlg)" class="new-planet-btn">
+                New Planet
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="loading$ | async">Loading...</div>
+
+    <div class="planet-list-content">
+        <ng-container *ngIf="viewMode$ | async as vm">
+            <ng-container *ngIf="vm === 'grid'; else tableTmpl">
+                <app-planet-grid
+                    [planets]="(planets$ | async) ?? []"
+                    [filterText]="filterText"
+                ></app-planet-grid>
+            </ng-container>
+            <ng-template #tableTmpl>
+                <app-planet-table
+                    [planets]="(planets$ | async) ?? []"
+                    [filterText]="filterText"
+                    (sortChange)="onSortChanged($event)"
+                ></app-planet-table>
+            </ng-template>
+        </ng-container>
+    </div>
 </div>
-
-<div *ngIf="loading$ | async">Loading...</div>
-
-<ng-container *ngIf="viewMode$ | async as vm">
-    <ng-container *ngIf="vm === 'grid'; else tableTmpl">
-        <app-planet-grid
-            [planets]="(planets$ | async) ?? []"
-            [filterText]="filterText"
-        ></app-planet-grid>
-    </ng-container>
-    <ng-template #tableTmpl>
-        <app-planet-table
-            [planets]="(planets$ | async) ?? []"
-            [filterText]="filterText"
-            (sortChange)="onSortChanged($event)"
-        ></app-planet-table>
-    </ng-template>
-</ng-container>
 
 <app-confirm-dialog #confirmDlg></app-confirm-dialog>

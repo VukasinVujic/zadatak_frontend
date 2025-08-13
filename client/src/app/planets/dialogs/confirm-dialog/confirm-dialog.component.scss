@@ -1,0 +1,47 @@
+@use "colors" as *;
+
+.confirm-dialog {
+    border: 1px solid $primary-white;
+    width: 400px;
+    height: 280px;
+    opacity: 1;
+    border-radius: 8px;
+    .confirm-dialog-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        .confirm-dialog-container-img {
+            width: 96px;
+            width: 96px;
+            height: auto;
+            display: block;
+        }
+
+        .actions-confirm {
+            background-color: $primary-dark-blue;
+            color: $primary-white;
+        }
+
+        .actions-cancel {
+            background-color: $primary-white;
+            color: $primary-light-gray;
+        }
+
+        .actions-confirm,
+        .actions-cancel {
+            border: 1px solid $primary-white;
+            width: 120px;
+            height: 40px;
+            opacity: 1;
+            border-radius: 4px;
+            gap: 10px;
+            padding-top: 10px;
+            padding-right: 12px;
+            padding-bottom: 10px;
+            padding-left: 12px;
+        }
+    }
+}

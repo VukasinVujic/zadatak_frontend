@@ -1,25 +1,51 @@
 <div class="planet-grid-container">
-    <span>Grid view</span>
     <div
         *ngFor="let p of view; trackBy: trackById"
         class="card-container"
         [routerLink]="['/planets', p.id]"
         style="cursor: pointer"
     >
-        <img *ngIf="p.imageUrl" [src]="p.imageUrl" alt="" class="card-img" />
+        <div class="card-img-container">
+            <img
+                *ngIf="p.imageUrl"
+                [src]="p.imageUrl"
+                alt="no-image"
+                class="card-img"
+            />
+        </div>
         <div class="card-title">
             {{ p.planetName }}
         </div>
-        <div class="muted" *ngIf="p.description">{{ p.description }}</div>
 
-        <div class="row">
-            <span class="label">Color:</span>
-            <span class="chip" [style.background]="p.planetColor">{{
-                p.planetColor || "—"
-            }}</span>
+        <div class="card-description" *ngIf="p.description">
+            {{ p.description }}
         </div>
-        <div>Radius: {{ p.planetRadiusKM | number }} km</div>
-        <div>From Sun: {{ p.distInMillionsKM?.fromEarth }} km</div>
-        <div>From Earth: {{ p.distInMillionsKM?.fromSun }} km</div>
+
+        <div class="card-content-filters">
+            <div class="row">
+                <div class="col">
+                    <span class="col-info">{{ p.planetColor }}</span>
+                    <span class="col-label">Color:</span>
+                </div>
+                <div class="col">
+                    <span class="col-info">
+                        {{ p.distInMillionsKM?.fromSun }}</span
+                    >
+                    <span class="col-label">Dist. from Sun</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="col-info"> {{ p.planetRadiusKM }} </span>
+                    <span class="col-label">Radius</span>
+                </div>
+                <div class="col">
+                    <span class="col-info">
+                        {{ p.distInMillionsKM?.fromEarth }}
+                    </span>
+                    <span class="col-label">Dist. from Earth</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

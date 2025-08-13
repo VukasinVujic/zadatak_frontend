@@ -65,10 +65,18 @@ export class PlanetFormDialogComponent {
         if (!this.model.planetName?.trim()) return;
         this.dlgRef.nativeElement.close();
         const confirmed = await this.confirmDlg.open(
-            this.mode === 'create' ? 'Create new planet?' : 'Update planet?'
+            this.mode === 'create'
+                ? 'Create new planet?'
+                : `update ${this.model.planetName}`,
+            this.mode === 'create' ? 'creating' : 'updating'
         );
         if (!confirmed) return;
 
         this.resolver?.({ ...this.model });
+    }
+    onFileSelected(e: Event) {
+        console.log(
+            'needs additional explaination about this button about what it is suppose to do and how'
+        );
     }
 }

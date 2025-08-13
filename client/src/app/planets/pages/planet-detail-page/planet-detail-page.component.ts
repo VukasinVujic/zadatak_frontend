@@ -44,7 +44,10 @@ export class PlanetDetailPageComponent {
     }
 
     async remove(p: Planet) {
-        const confirmed = await this.confirmDlg.open('Delete Planet?');
+        const confirmed = await this.confirmDlg.open(
+            `delete ${p.planetName}?`,
+            'deleting'
+        );
         if (!confirmed) return;
         this.store.dispatch(PlanetActions.deletePlanet({ id: p.id }));
         this.router.navigate(['/planets']);
