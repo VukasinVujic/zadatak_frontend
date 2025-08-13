@@ -13,9 +13,19 @@ export const loadPlanetsFailure = createAction(
     props<{ error: string }>()
 );
 
-export const addPlanet = createAction(
-    '[Planet] Add Planet',
+export const createPlanet = createAction(
+    '[Planet] Create',
+    props<{ planet: Omit<Planet, 'id'> }>()
+);
+
+export const createPlanetSuccess = createAction(
+    '[Planet] Create Success',
     props<{ planet: Planet }>()
+);
+
+export const createPlanetFailure = createAction(
+    '[Planet] Create Failure',
+    props<{ error: any }>()
 );
 
 export const updatePlanet = createAction(

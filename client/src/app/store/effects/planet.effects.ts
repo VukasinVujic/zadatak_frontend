@@ -53,4 +53,29 @@ export class PlanetEffects {
             ),
         { dispatch: false }
     );
+
+    create$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PlanetActions.createPlanet),
+            concatMap(({ planet }) =>
+                this.planetService.createPlanet(planet).pipe(
+                    map((created) =>
+                        PlanetActions.createPlanetSuccess({ planet: created })
+                    ),
+                    catchError((error: unknown) =>
+                        of(PlanetActions.createPlanetFailure({ error }))
+                    )
+                )
+            )
+        )
+    );
+
+    createNavigate$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(PlanetActions.createPlanetSuccess),
+                tap(({ planet }) => this.router.navigate(['/planets']))
+            ),
+        { dispatch: false }
+    );
 }

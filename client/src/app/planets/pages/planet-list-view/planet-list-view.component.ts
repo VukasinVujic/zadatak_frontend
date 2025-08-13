@@ -14,6 +14,7 @@ import { PlanetTableComponent } from '../../components/planet-table/planet-table
 import { PlanetGridComponent } from '../../components/planet-grid/planet-grid.component';
 import { PlanetFormDialogComponent } from '../../dialogs/planet-form-dialog/planet-form-dialog.component';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import { Planet } from '../../../models/planet';
 
 @Component({
     selector: 'app-planet-list-view',
@@ -33,6 +34,7 @@ import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dia
 })
 export class PlanetListViewComponent {
     private store = inject(Store);
+
     planets$ = this.store.select(selectAllPlanets);
     loading$ = this.store.select(selectPlanetLoading);
     viewMode$ = this.store.select(selectViewMode);
@@ -53,7 +55,11 @@ export class PlanetListViewComponent {
     async onCreate(formDlg: PlanetFormDialogComponent) {
         const draft = await formDlg.openForCreate();
         if (!draft) return;
-        this.store.dispatch(PlanetActions.addPlanet({ planet: draft }));
+
+        const { id, ...rest } = draft as Planet;
+        this.store.dispatch(
+            PlanetActions.createPlanet({ planet: rest as Omit<Planet, 'id'> })
+        );
     }
 
     async create(formDlg: PlanetFormDialogComponent) {
@@ -64,7 +70,11 @@ export class PlanetListViewComponent {
             'Creating'
         );
         if (!confirmed) return;
-        this.store.dispatch(PlanetActions.addPlanet({ planet: draft }));
+        const { id, ...rest } = draft as Planet;
+
+        this.store.dispatch(
+            PlanetActions.createPlanet({ planet: rest as Omit<Planet, 'id'> })
+        );
     }
 
     onSortChanged(_: any) {

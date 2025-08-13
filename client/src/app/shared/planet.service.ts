@@ -14,4 +14,8 @@ export class PlanetService {
     deletePlanet(id: number): Observable<void> {
         return this.http.delete<void>(`/api/planets/${id}`);
     }
+
+    createPlanet(payload: Omit<Planet, 'id'>): Observable<Planet> {
+        return this.http.post<Planet>('/api/planets', payload);
+    }
 }

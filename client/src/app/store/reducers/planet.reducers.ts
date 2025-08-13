@@ -23,9 +23,24 @@ export const planetReducer = createReducer(
         loaded: false,
         error,
     })),
-    on(PlanetActions.addPlanet, (state, { planet }) => ({
+
+    on(PlanetActions.createPlanet, (state) => ({
         ...state,
+        loading: true,
+        error: null,
+    })),
+
+    on(PlanetActions.createPlanetSuccess, (state, { planet }) => ({
+        ...state,
+        loading: false,
+        error: null,
         planets: [...state.planets, planet],
+    })),
+
+    on(PlanetActions.createPlanetFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error,
     })),
 
     on(PlanetActions.updatePlanet, (state, { planet }) => ({
