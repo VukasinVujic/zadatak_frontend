@@ -1,0 +1,8 @@
+@mixin text($weight, $size, $lineHeight, $letterSpacing, $paddingLeft: null) {
+    font-family: Inter;
+    font-weight: $weight;
+    font-size: $size;
+    line-height: $lineHeight;
+    letter-spacing: $letterSpacing;
+    padding-left: $paddingLeft;
+}

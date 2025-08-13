@@ -99,7 +99,13 @@
         }
 
         .table-plane-cell {
-            padding: 8px;
+            font-family: Inter;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            letter-spacing: 0%;
+
+            color: $primary-dark-gray;
         }
     }
 }

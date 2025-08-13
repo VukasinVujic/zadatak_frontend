@@ -1,4 +1,5 @@
 @use "colors" as *;
+@use "mixins" as m;
 
 .planet-list-container {
     background-color: $secondary-light-blue;
@@ -16,13 +17,7 @@
         background-color: $primary-white;
 
         .planet-list-title {
-            font-family: Inter;
-            font-weight: 700;
-            font-style: Bold;
-            font-size: 38px;
-            line-height: 40px;
-            letter-spacing: 0%;
-            padding-left: 40px;
+            @include m.text(700, 38px, 40px, 0%, 40px);
         }
 
         .planet-list-switch {

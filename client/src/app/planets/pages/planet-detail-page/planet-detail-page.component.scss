@@ -1,4 +1,5 @@
 @use "colors" as *;
+@use "mixins" as m;
 
 .detail-container {
     background-color: $secondary-light-blue;
