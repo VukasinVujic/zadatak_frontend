@@ -29,8 +29,18 @@ export const createPlanetFailure = createAction(
 );
 
 export const updatePlanet = createAction(
-    '[Planet] Update Planet',
+    '[Planet] Update',
     props<{ planet: Planet }>()
+);
+
+export const updatePlanetSuccess = createAction(
+    '[Planet] Update Success',
+    props<{ planet: Planet }>()
+);
+
+export const updatePlanetFailure = createAction(
+    '[Planet] Update Failure',
+    props<{ error: any }>()
 );
 
 export const deletePlanet = createAction(

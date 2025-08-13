@@ -74,8 +74,24 @@ export class PlanetEffects {
         () =>
             this.actions$.pipe(
                 ofType(PlanetActions.createPlanetSuccess),
-                tap(({ planet }) => this.router.navigate(['/planets']))
+                tap(() => this.router.navigate(['/planets']))
             ),
         { dispatch: false }
+    );
+
+    update$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PlanetActions.updatePlanet),
+            concatMap(({ planet }) =>
+                this.planetService.updatePlanet(planet).pipe(
+                    map((updated) =>
+                        PlanetActions.updatePlanetSuccess({ planet: updated })
+                    ),
+                    catchError((error: unknown) =>
+                        of(PlanetActions.updatePlanetFailure({ error }))
+                    )
+                )
+            )
+        )
     );
 }

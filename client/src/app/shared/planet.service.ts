@@ -18,4 +18,8 @@ export class PlanetService {
     createPlanet(payload: Omit<Planet, 'id'>): Observable<Planet> {
         return this.http.post<Planet>('/api/planets', payload);
     }
+
+    updatePlanet(planet: Planet) {
+        return this.http.put<Planet>(`/api/planets/${planet.id}`, planet);
+    }
 }

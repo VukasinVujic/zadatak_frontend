@@ -43,11 +43,24 @@ export const planetReducer = createReducer(
         error,
     })),
 
-    on(PlanetActions.updatePlanet, (state, { planet }) => ({
+    on(PlanetActions.updatePlanet, (state) => ({
         ...state,
+        loading: true,
+        error: null,
+    })),
+
+    on(PlanetActions.updatePlanetSuccess, (state, { planet }) => ({
+        ...state,
+        loading: false,
+        error: null,
         planets: state.planets.map((p) => (p.id === planet.id ? planet : p)),
     })),
 
+    on(PlanetActions.updatePlanetFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error,
+    })),
     on(PlanetActions.deletePlanet, (state) => ({
         ...state,
         loading: true,
