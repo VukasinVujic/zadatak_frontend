@@ -9,8 +9,12 @@
         <h2>Confirm {{ messageTitle }}</h2>
         <p>Are you sure you want to {{ message }}</p>
         <div class="actions">
-            <button (click)="yes()" class="actions-confirm">Confirm</button>
-            <button (click)="no()" class="actions-cancel">Cancel</button>
+            <button (click)="removeItem()" class="actions-confirm">
+                Confirm
+            </button>
+            <button (click)="doNotRemoveItem()" class="actions-cancel">
+                Cancel
+            </button>
         </div>
     </div>
 </dialog>

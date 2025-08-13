@@ -32,11 +32,12 @@ export class ConfirmDialogComponent implements OnInit {
         return new Promise((res) => (this.resolver = res));
     }
 
-    yes() {
+    removeItem() {
         this.dlgRef.nativeElement.close();
         this.resolver?.(true);
     }
-    no() {
+
+    doNotRemoveItem() {
         this.dlgRef.nativeElement.close();
         this.resolver?.(false);
     }

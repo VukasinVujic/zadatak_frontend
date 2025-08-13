@@ -6,6 +6,7 @@ export interface PlanetState {
     loading: boolean;
     loaded: boolean;
     error: string | null;
+    pendingDeleteIds: number[];
 }
 
 export const initialPlanetState: PlanetState = {
@@ -14,4 +15,5 @@ export const initialPlanetState: PlanetState = {
     loading: false,
     loaded: false,
     error: null,
+    pendingDeleteIds: [],
 };

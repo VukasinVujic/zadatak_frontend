@@ -33,8 +33,22 @@ export const planetReducer = createReducer(
         planets: state.planets.map((p) => (p.id === planet.id ? planet : p)),
     })),
 
-    on(PlanetActions.deletePlanet, (state, { id }) => ({
+    on(PlanetActions.deletePlanet, (state) => ({
         ...state,
+        loading: true,
+        error: null,
+    })),
+
+    on(PlanetActions.deletePlanetSuccess, (state, { id }) => ({
+        ...state,
+        loading: false,
+        error: null,
         planets: state.planets.filter((p) => p.id !== id),
+    })),
+
+    on(PlanetActions.deletePlanetFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error,
     }))
 );

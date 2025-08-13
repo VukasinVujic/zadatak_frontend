@@ -2,12 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as PlanetActions from '../actions/planet.actions';
 import { PlanetService } from '../../shared/planet.service';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, tap, concatMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PlanetEffects {
     private actions$ = inject(Actions);
     private planetService = inject(PlanetService);
+    private router = inject(Router);
 
     loadPlanets$ = createEffect(() =>
         this.actions$.pipe(
@@ -27,5 +29,28 @@ export class PlanetEffects {
                 )
             )
         )
+    );
+
+    delete$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PlanetActions.deletePlanet),
+            concatMap(({ id }) =>
+                this.planetService.deletePlanet(id).pipe(
+                    map(() => PlanetActions.deletePlanetSuccess({ id })),
+                    catchError((error) =>
+                        of(PlanetActions.deletePlanetFailure({ id, error }))
+                    )
+                )
+            )
+        )
+    );
+
+    deleteNavigate$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(PlanetActions.deletePlanetSuccess),
+                tap(() => this.router.navigate(['/planets']))
+            ),
+        { dispatch: false }
     );
 }

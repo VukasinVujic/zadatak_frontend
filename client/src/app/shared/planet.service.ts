@@ -10,4 +10,8 @@ export class PlanetService {
     getPlanets(): Observable<Planet[]> {
         return this.http.get<Planet[]>('/api/planets');
     }
+
+    deletePlanet(id: number): Observable<void> {
+        return this.http.delete<void>(`/api/planets/${id}`);
+    }
 }

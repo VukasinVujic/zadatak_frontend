@@ -27,3 +27,13 @@ export const deletePlanet = createAction(
     '[Planet] Delete Planet',
     props<{ id: number }>()
 );
+
+export const deletePlanetSuccess = createAction(
+    '[Planet] Delete Success',
+    props<{ id: number }>()
+);
+
+export const deletePlanetFailure = createAction(
+    '[Planet] Delete Failure',
+    props<{ id: number; error: any }>()
+);
