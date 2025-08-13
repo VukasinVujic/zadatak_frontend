@@ -72,12 +72,14 @@
         background-color: $secondary-light-blue;
         display: grid;
         grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        grid-template-areas: "main specs";
         gap: 24px;
         align-items: center;
         width: 100%;
         box-sizing: border-box;
 
         .detail-body-main {
+            grid-area: main;
             display: flex;
             background-color: $primary-white;
             gap: 16px;
@@ -118,6 +120,7 @@
         .specs {
             min-width: 0;
             background-color: $secondary-light-blue;
+            grid-area: specs;
 
             display: flex;
             flex-direction: column;
@@ -160,10 +163,23 @@
             }
         }
     }
+    @media (max-width: 1030px) {
+        .detail-body {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "specs"
+                "main";
+            align-items: start;
+        }
+    }
 }
 
-@media (max-width: 900px) {
-    .detail-body {
+@media (max-width: 1030px) {
+    .detail-container .detail-body {
         grid-template-columns: 1fr;
+        grid-template-areas:
+            "specs"
+            "main";
+        align-items: start;
     }
 }
