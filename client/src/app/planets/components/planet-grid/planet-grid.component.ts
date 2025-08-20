@@ -1,5 +1,5 @@
-import { Component, inject, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { Planet } from '../../../models/planet';
@@ -15,7 +15,6 @@ export class PlanetGridComponent {
     @Input() planets: Planet[] = [];
     @Input() filterText = '';
 
-    private router = inject(Router);
     trackById = (_: number, p: Planet) => p.id ?? p.planetName;
 
     // duplicate code fix later
@@ -29,9 +28,5 @@ export class PlanetGridComponent {
             );
         }
         return rows;
-    }
-
-    goToDetails(p: Planet) {
-        this.router.navigate(['/planet', p.id]);
     }
 }

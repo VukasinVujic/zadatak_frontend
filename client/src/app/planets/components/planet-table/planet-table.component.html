@@ -12,9 +12,12 @@
             <th (click)="onSort('planetName')">Name</th>
             <th (click)="onSort('planetColor')">Color</th>
             <th (click)="onSort('planetRadiusKM')">Radius (km)</th>
-            <!-- need to be fixed to be sorted by distance from sun -->
-            <th (click)="onSort('distInMillionsKM')">Dist. from Sun (km)</th>
-            <th (click)="onSort('distInMillionsKM')">Dist. from Earth (km)</th>
+            <th (click)="onSort('distInMillionsKM.fromSun')">
+                Dist. from Sun (km)
+            </th>
+            <th (click)="onSort('distInMillionsKM.fromEarth')">
+                Dist. from Earth (km)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +25,6 @@
             *ngFor="let p of view; trackBy: trackPlanet"
             [routerLink]="['/planets', p.id]"
             class="table-planet-row"
-            style="cursor: pointer"
         >
             <td class="name-cell">
                 <img
@@ -48,10 +50,11 @@
             </td>
 
             <td class="table-plane-cell">
-                {{ p.distInMillionsKM?.fromEarth }}
-            </td>
-            <td class="table-plane-cell">
                 {{ p.distInMillionsKM?.fromSun }}
+            </td>
+
+            <td class="table-plane-cell">
+                {{ p.distInMillionsKM?.fromEarth }}
             </td>
         </tr>
     </tbody>
